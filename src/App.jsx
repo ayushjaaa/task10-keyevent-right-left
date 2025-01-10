@@ -7,7 +7,7 @@ function boxhandler(event){
 if(event.key === 'ArrowRight'   ){
   setbox((prev)=>{
 if(prev.x <= window.innerWidth){
-  return({x:prev.x + 20 ,y:prev.y})
+  return({x:prev.x + 10 ,y:prev.y})
 }
 else{
  return ({x:prev.x,y:prev.y})
