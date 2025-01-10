@@ -1,23 +1,54 @@
-import React, { useState, useEffect } from 'react';
 
-function App() {
-  const [position, setPosition] = useState(0);
+import React, { useEffect, useState } from 'react'
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'ArrowRight') {
-      setPosition((prevPosition) => prevPosition + 10);
-    } else if (event.key === 'ArrowLeft') {
-      setPosition((prevPosition) => prevPosition - 10);
+const App = () => {
+  const [box, setbox] = useState({x:0,y:0})
+function boxhandler(event){
+if(event.key === 'ArrowRight'   ){
+  setbox((prev)=>{
+if(prev.x <= window.innerWidth){
+  return({x:prev.x + 20 ,y:prev.y})
+}
+else{
+ return ({x:prev.x,y:prev.y})
+}
+    
+  })
+}
+else if(event.key === 'ArrowLeft' ){
+  setbox((prev)=>{
+    if(prev.x > window.innerWidth){
+     return {x:prev.x -1 ,y:prev.y}
     }
-  };
+    else{
+      return {x:prev.x ,y:prev.y}
+    }
+  })
+}
+else if(event.key === 'ArrowUp'){
+  setbox((prev)=>({x:prev.x,y:prev.y +1}))
+}
+else if(event.key === 'ArrowDown'){
+  setbox((prev)=>({x:prev.x,y:prev.y - 1}))
+}
+}
+useEffect(() => {
 
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
+window.addEventListener('keydown',boxhandler)
+  return () => {
+    window.removeEventListener('keydown',boxhandler)
+  }
+}, [])
 
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+  
+  return (
+    <div className='w-full h-screen bg-slate-300'>
+      <h1>{box.x}</h1>
+      <h1>{box.y}</h1>
+      <div className='box w-20 h-20 bg-slate-500 ' style={{transform: `translate(${box.x}%, ${box.y}%)`}}></div>
+    
+    </div>
+  )
+}
 
-
-
+export default App
