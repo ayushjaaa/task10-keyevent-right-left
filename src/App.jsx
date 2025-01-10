@@ -43,8 +43,7 @@ window.addEventListener('keydown',boxhandler)
   
   return (
     <div className='w-full h-screen bg-slate-300'>
-      <h1>{box.x}</h1>
-      <h1>{box.y}</h1>
+ 
       <div className='box w-20 h-20 bg-slate-500 ' style={{transform: `translate(${box.x}%, ${box.y}%)`}}></div>
     
     </div>
